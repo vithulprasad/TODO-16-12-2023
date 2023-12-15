@@ -17,7 +17,7 @@ mongoose.connect(
 );
 
 
-//-------------------------accessControl------------------------------
+//-------------------------  Access control ------------------------------
 app.get("/access", async (req, res) => {
   const token = req.headers;
   const decode = jwt.verify(token.authorization,process.env.JWT);
@@ -34,7 +34,7 @@ app.get("/access", async (req, res) => {
     res.json({ success: false });
   }
 });
-// -------------------------this is the Registration-----------------------------
+// ------------------------- Handle Registration -----------------------------
 app.post("/register", async (req, res) => {
   const { password, email, phone, name } = req.body.data;
   const passwordHash = await bcrypt.hash(password,10)
@@ -53,7 +53,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// --------------------handleLogin--------------------------------------//
+// --------------------  Handle Login  --------------------------------------//
 app.post("/login", async (req, res) => {
   const { emailOrPass, password } = req.body.data;
 
@@ -82,7 +82,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-//-----------------------------------------add todo-----------------------------------
+//----------------------------------------- Add TODO-----------------------------------
 
 app.post("/addTodoList", async (req, res) => {
   const token = req.body.headers.Authorization;
@@ -99,7 +99,7 @@ app.post("/addTodoList", async (req, res) => {
   }
 });
 
-//-----------------------------------------add todo-----------------------------------
+//-----------------------------------------List TODO-----------------------------------
 app.post("/listTodo", async (req, res) => {
   const token = req.body.headers.Authorization;
   const decode = jwt.verify(token,process.env.JWT);
@@ -130,7 +130,7 @@ app.post("/listTodo", async (req, res) => {
 });
 
 
-//------------------------------------complete todo---------------------------------
+//------------------------------------Add Tic------------------------------------
 
 app.post("/complete", async (req, res) => {
   const token = req.body.headers.Authorization;
@@ -159,7 +159,7 @@ app.post("/complete", async (req, res) => {
   }
 });
 
-//------------------------------------notComplete todo---------------------------------
+//------------------------------------Remove tic---------------------------------
 app.post("/notComplete", async (req, res) => {
   const token = req.body.headers.Authorization;
   const decode = jwt.verify(token,process.env.JWT);
@@ -187,6 +187,7 @@ app.post("/notComplete", async (req, res) => {
   }
 });
 
+// ----------------------------------delete One TODO------------------------------------------
 app.post("/deleteOneTodo", async (req, res) => {
   const token = req.body.headers.Authorization;
   const decode = jwt.verify(token,process.env.JWT);
