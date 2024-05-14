@@ -59,10 +59,12 @@ app.post("/register", async (req, res) => {
 // --------------------  Handle Login  --------------------------------------//
 app.post("/login", async (req, res) => {
   const { emailOrPass, password } = req.body.data;
+ console.log(emailOrPass,'this is details',password)
 
   const findUser = await user.findOne({
     $or: [{ name: emailOrPass }, { email: emailOrPass }],
   });
+ console.log(findUser,'this is the user')
   if (findUser) {
     const passwordMatch =  await bcrypt.compare(password,findUser.password);
     if (passwordMatch) {
