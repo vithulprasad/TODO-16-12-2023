@@ -1,4 +1,4 @@
 
-export const user = 'http://localhost:4000/'
+export const user = 'https://e-comerce-task.onrender.com/'
 
 
