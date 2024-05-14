@@ -40,7 +40,7 @@ app.get("/access", async (req, res) => {
 // ------------------------- Handle Registration -----------------------------
 app.post("/register", async (req, res) => {
   const { password, email, phone, name } = req.body.data;
-  const passwordHash = await bcrypt.hash(password,10)
+  const passwordHash = password
   const check_user_existing = await user.findOne({ email: email });
   if (check_user_existing) {
     res.json({ message: "user is existing", success: false });
@@ -66,8 +66,8 @@ app.post("/login", async (req, res) => {
   });
  console.log(findUser,'this is the user')
   if (findUser) {
-    const passwordMatch =  await bcrypt.compare(password,findUser.password);
-    if (passwordMatch) {
+   
+    if (password == findUser.password) {
       const token = jwt.sign({ id: findUser._id },process.env.JWT);
 
       res.json({
