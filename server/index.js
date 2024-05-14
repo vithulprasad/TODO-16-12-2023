@@ -9,7 +9,10 @@ const app = express();
 require('dotenv').config();
 
 
-app.use(cors());
+ app.use(cors({
+    origin: 'https://todo-16-12-2023.vercel.app',
+    methods: ["GET", "POST"],
+  }));
 app.use(express.json());
 
 mongoose.connect(
